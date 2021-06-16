@@ -3,7 +3,8 @@ import argparse
 
 BUFFER_SIZE = 1024
 
-class MyTCPHandler(socketserver.BaseRequestHandler):
+class udpHandler(socketserver.BaseRequestHandler):
+    # Receive udp packet & print to console
     def handle(self):
         self.data = self.request.recv(BUFFER_SIZE).strip()
         msg = self.data.decode('utf-8')
@@ -12,7 +13,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 
 def main(host, port):
     print(">> Listening on {}:{}  (press Ctrl+C to interrupt)".format(host, port))
-    with socketserver.TCPServer((host, port), MyTCPHandler) as server:
+    with socketserver.TCPServer((host, port), udpHandler) as server:
         server.serve_forever()
 
 if __name__ == "__main__":
