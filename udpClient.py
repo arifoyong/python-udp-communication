@@ -1,10 +1,8 @@
 import socket
 import argparse
 
-
 def main(host, port):
     data = ""
-
     print(">> Connecting to {}:{}  (type exit to quit program)".format(host, port))
     while data != 'exit':
         data = input()
