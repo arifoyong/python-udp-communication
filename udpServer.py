@@ -1,7 +1,6 @@
 import argparse
 import socket
 import socketserver
-from udpClient import main
 
 class MyUDPHandler(socketserver.BaseRequestHandler):
     def handle(self):
