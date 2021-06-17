@@ -1,19 +1,19 @@
-import socketserver
 import argparse
+import socket
+import socketserver
 
-BUFFER_SIZE = 1024
-
-class udpHandler(socketserver.BaseRequestHandler):
-    # Receive udp packet & print to console
+class MyUDPHandler(socketserver.BaseRequestHandler):
     def handle(self):
-        self.data = self.request.recv(BUFFER_SIZE).strip()
-        msg = self.data.decode('utf-8')
-        ip, port = self.client_address
-        print("{}:{} - {}".format(ip, port, msg))
-
-def main(host, port):
-    print(">> Listening on {}:{}  (press Ctrl+C to interrupt)".format(host, port))
-    with socketserver.TCPServer((host, port), udpHandler) as server:
+        addr, port = self.client_address
+        bytesData = self.request[0].strip()
+        data = bytesData.decode('utf-8')
+        print("{}:{} - {}".format(addr, port, data))
+ 
+def main(host,port):
+    if host == 'localhost':
+        host = socket.gethostname()
+    print("UDP server up and listening on {}:{}".format(host, port))
+    with socketserver.UDPServer((host, port), MyUDPHandler) as server:
         server.serve_forever()
 
 if __name__ == "__main__":

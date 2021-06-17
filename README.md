@@ -17,6 +17,10 @@ python udpServer.py --host=localhost --port=20000
 
 The above code will start a UDP server. The server will print any message received from client. 
 To stop the server press 'Ctr+C'.
+
+Note:
+> When localhost is used, the underlying code will find the current hostname
+  Using localhost will work if the client is within the same PC/machine
 <br/>
 <br/>
 
